@@ -1,6 +1,6 @@
-886d352735b483028d68a43d1b87b7c6 *DESCRIPTION
+d8bd07bfcc889e82983950e735df41ff *DESCRIPTION
 d353838bb49faef50207c6d8f5374082 *NAMESPACE
-1f3a0a05a1ca2225c275a40cf2c35702 *NEWS.md
+6536bf7d6c4195ac9e059d3b6b4c6767 *NEWS.md
 96fe96320693d6935bd3108d8ea92d32 *R/RcppExports.R
 74e911fd4c971631de9f30c97a6d7a7b *R/add_maxinfo.R
 cb405d94e8904361e784555c4d982ce6 *R/check_gsnb.R
@@ -11,12 +11,12 @@ b53759da17a746de81d2d59fe67a5597 *R/information.R
 307b57deb7b0a855967894bd7bf72db1 *R/spending_functions.R
 f9bb9bd9bba8fc959fbdbf00daa0ba61 *R/support_functions.R
 55c5a443e34b20c94be569b62d170ad9 *R/zzz.R
-8bac5496b4f6d9bb8081aaba0e808500 *README.md
+7c0b0ac30d51e769aa38465e959c0295 *README.md
 37a8ccc01f39280295f80491fbb94f48 *build/vignette.rds
 33ad80c0f918c20f4c04068bdcc22cce *data/hospitalizations.rda
 57c44bc7c14e0526225dd93dce1a039a *inst/doc/Introduction_gscounts.R
 cc98021218959b1fadde4f619bd870e4 *inst/doc/Introduction_gscounts.Rmd
-a02bd7be8c1a7b4c0336ea4d47337bde *inst/doc/Introduction_gscounts.html
+534a5bbe566183e9a7470913e5ad312b *inst/doc/Introduction_gscounts.html
 50f6d35076f0ab9e405ebcb5af40863f *inst/generate_example_data.R
 0d767105ea65ddd7b322c87689fb9748 *man/add_maxinfo.Rd
 128a2366243b817559d31e9a7321a94d *man/add_stopping_prob.Rd
@@ -36,7 +36,7 @@ b2d922dd99541ff0cdd769c650a41d82 *man/samplesize_from_followup.Rd
 dd9d81833fc9018e2f9ccbfdc8e05464 *man/samplesize_from_periods.Rd
 ee1eafbc01d4dfa607e9027f7331273b *man/studyperiod_from_recruit.Rd
 7a9cdf34c23b3e56179823f095202659 *src/RcppExports.cpp
-74ff34a9a995d038bafce81c05ce801f *src/cpp_functions.cpp
+ed19f1f893d05b464e8f8af7b8984bb9 *src/cpp_functions.cpp
 0ac450e4c66e4f5a47deae46c160f5f0 *tests/testthat.R
 e24ed6c734c201cc2af5ec48da395f69 *tests/testthat/test_bindingfut.R
 4b60f9cc2073fae93d49c3dea61acfaf *tests/testthat/test_efficacy.R

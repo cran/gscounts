@@ -1,12 +1,14 @@
-# gscounts
 
-[![Build Status](https://travis-ci.org/tobiasmuetze/gscounts.svg?branch=master)](https://travis-ci.org/tobiasmuetze/gscounts)
+[![Travis Build Status](https://travis-ci.org/tobiasmuetze/gscounts.svg?branch=master)](https://travis-ci.org/tobiasmuetze/gscounts) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/gscounts)](https://cran.r-project.org/package=gscounts) [![downloads](http://cranlogs.r-pkg.org/badges/grand-total/gscounts)](https://cranlogs.r-pkg.org/badges/grand-total/gscounts)
 
-## Installation
+Installation
+------------
 
-To install the development version from github:
+``` r
+# CRAN version 
+install.packages("gscounts")
 
-```R
+# Development version from GitHub
 # install.packages("devtools")
 devtools::install_github("tobiasmuetze/gscounts")
 ```
