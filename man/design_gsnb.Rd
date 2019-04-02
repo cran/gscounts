@@ -4,10 +4,11 @@
 \alias{design_gsnb}
 \title{Group sequential design with negative binomial outcomes}
 \usage{
-design_gsnb(rate1, rate2, dispersion, ratio_H0 = 1, random_ratio = 1, power,
-  sig_level, timing, esf = obrien, esf_futility = NULL, futility = NULL,
-  t_recruit1 = NULL, t_recruit2 = NULL, study_period = NULL,
-  accrual_period = NULL, followup_max = NULL, ...)
+design_gsnb(rate1, rate2, dispersion, ratio_H0 = 1, random_ratio = 1,
+  power, sig_level, timing, esf = obrien, esf_futility = NULL,
+  futility = NULL, t_recruit1 = NULL, t_recruit2 = NULL,
+  study_period = NULL, accrual_period = NULL, followup_max = NULL,
+  accrual_speed = 1, ...)
 }
 \arguments{
 \item{rate1}{numeric; assumed rate of treatment group 1 in the alternative}
@@ -16,7 +17,7 @@ design_gsnb(rate1, rate2, dispersion, ratio_H0 = 1, random_ratio = 1, power,
 
 \item{dispersion}{numeric; dispersion (shape) parameter of negative binomial distribution}
 
-\item{ratio_H0}{numeric; positive number denoting the rate ratio rate_1/rate_2
+\item{ratio_H0}{numeric; positive number denoting the rate ratio \eqn{\mu_1/\mu_2}
 under the null hypothesis, i.e. the non-inferiority or superiority margin}
 
 \item{random_ratio}{numeric; randomization ratio n1/n2}
@@ -26,7 +27,10 @@ under the null hypothesis, i.e. the non-inferiority or superiority margin}
 \item{sig_level}{numeric; Type I error / significance level}
 
 \item{timing}{numeric vector; 0 < \code{timing[1]} < ... < \code{timing[K]} = 1
-with \code{K} the number of analyses, i.e. (K-1) interim analyses and final analysis}
+with \code{K} the number of analyses, i.e. (K-1) interim analyses and final analysis.
+When the timing of efficacy and futility analyses differ, timing should not be defined.
+Instead, the arguments \code{timing_eff} and \code{timing_fut} have to be used to specify
+the timing of the efficacy and futility analyses, respectively.}
 
 \item{esf}{function; error spending function}
 
@@ -39,13 +43,19 @@ with \code{K} the number of analyses, i.e. (K-1) interim analyses and final anal
 
 \item{t_recruit2}{numeric vector; recruit (i.e. study entry) times in group 2}
 
-\item{study_period}{numeric; study duration}
+\item{study_period}{numeric; study duration;
+to be set when follow-up times are not identical between subjects, NULL otherwise}
 
 \item{accrual_period}{numeric; accrual period}
 
-\item{followup_max}{numeric; maximum exposure time of a patient}
+\item{followup_max}{numeric; maximum exposure time of a subject; 
+to be set when follow-up times are to be equal for each subject, NULL otherwise}
 
-\item{...}{further arguments to be passed to the error spending function}
+\item{accrual_speed}{numeric; determines accrual speed; values larger than 1
+result in accrual slower than linear; values between 0 and 1 result in accrual 
+faster than linear.}
+
+\item{...}{further arguments. Will be passed to the error spending function.}
 }
 \value{
 A list with class "gsnb" containing the following components:
@@ -83,6 +93,25 @@ A list with class "gsnb" containing the following components:
 \description{
 Design a group sequential trial with negative binomial outcomes
 }
+\details{
+Denote  \eqn{\mu_1} and \eqn{\mu_2} the event rates in treatment groups 1 and 2.
+This function considers smaller event rates to be better. 
+The statistical hypothesis testing problem of interest is 
+\deqn{H_0: \frac{\mu_1}{\mu_2} \ge \delta  vs.  H_1: \frac{\mu_1}{\mu_2} < \delta,}
+with \eqn{\delta=}\code{ratio_H0}.
+Non-inferiority of treatment group 1 compared to treatment group 2 is tested for \eqn{\delta\in (1,\infty)}.
+Superiority of treatment group 1 over treatment group 2 is tested for \eqn{\delta \in (0,1]}.
+The calculation of the efficacy and (non-)binding futility boundaries are performed
+under the hypothesis \eqn{H_0: \frac{\mu_1}{\mu_2}= \delta} and 
+under the alternative \eqn{H_1: \frac{\mu_1}{\mu_2} = }\code{rate1} / \code{rate2}.
+
+The argument `accrual_speed` is used to adjust the accrual speed.
+Number of subjects in the study at study time t is given by
+\eqn{f(t)=a * t^b} with  \eqn{a = n / accrual_period} and \eqn{b=accrual_speed}  
+For linear recruitment, \eqn{b=1}. 
+\eqn{b > 1} results is slower than linear recruitment for \eqn{t < accrual_period} and 
+faster than linear recruitment for \eqn{t > accrual_period}. Vice verse for \eqn{b < 1}.
+}
 \examples{
 # Calculate the sample sizes for a given accrual period and study period (without futility)
 out <- design_gsnb(rate1 = 0.0875, rate2 = 0.125, dispersion = 5, 
@@ -113,4 +142,18 @@ out <- design_gsnb(rate1 = 0.0875, rate2 = 0.125, dispersion = 5,
                    power = 0.8, timing = c(0.5, 1), esf = obrien,
                    ratio_H0 = 1, sig_level = 0.025,
                    followup_max = 0.5, random_ratio = 1)
+                   
+# Different timing for efficacy and futility analyses
+ design_gsnb(rate1 = 1, rate2 = 2, dispersion = 5,
+             power = 0.8, esf = obrien,
+             ratio_H0 = 1, sig_level = 0.025, study_period = 3.5,
+             accrual_period = 1.25, random_ratio = 1, futility = "binding",
+             esf_futility = pocock, 
+             timing_eff = c(0.8, 1),
+             timing_fut = c(0.2, 0.5, 1))                    
+}
+\references{
+Mütze, T., Glimm, E., Schmidli, H., & Friede, T. (2018). 
+Group sequential designs for negative binomial outcomes. 
+Statistical Methods in Medical Research, \url{https://doi.org/10.1177/0962280218773115}.
 }
