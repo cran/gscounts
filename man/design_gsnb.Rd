@@ -4,11 +4,26 @@
 \alias{design_gsnb}
 \title{Group sequential design with negative binomial outcomes}
 \usage{
-design_gsnb(rate1, rate2, dispersion, ratio_H0 = 1, random_ratio = 1,
-  power, sig_level, timing, esf = obrien, esf_futility = NULL,
-  futility = NULL, t_recruit1 = NULL, t_recruit2 = NULL,
-  study_period = NULL, accrual_period = NULL, followup_max = NULL,
-  accrual_speed = 1, ...)
+design_gsnb(
+  rate1,
+  rate2,
+  dispersion,
+  ratio_H0 = 1,
+  random_ratio = 1,
+  power,
+  sig_level,
+  timing,
+  esf = obrien,
+  esf_futility = NULL,
+  futility = NULL,
+  t_recruit1 = NULL,
+  t_recruit2 = NULL,
+  study_period = NULL,
+  accrual_period = NULL,
+  followup_max = NULL,
+  accrual_speed = 1,
+  ...
+)
 }
 \arguments{
 \item{rate1}{numeric; assumed rate of treatment group 1 in the alternative}
@@ -155,5 +170,5 @@ out <- design_gsnb(rate1 = 0.0875, rate2 = 0.125, dispersion = 5,
 \references{
 Mütze, T., Glimm, E., Schmidli, H., & Friede, T. (2018). 
 Group sequential designs for negative binomial outcomes. 
-Statistical Methods in Medical Research, \url{https://doi.org/10.1177/0962280218773115}.
+Statistical Methods in Medical Research,  <doi:10.1177/0962280218773115>.
 }
